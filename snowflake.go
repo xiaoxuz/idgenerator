@@ -14,6 +14,10 @@ const (
 	NODEID_MAX    int64 = -1 ^ (-1 << NODEIDID_BITS)
 	SEQ_MAX       int64 = -1 ^ (-1 << SEQ_BITS)
 
+	/**
+	 * 1 符号位  |  41 timestemp                                    | 5 clusterID  |  5 nodeID  | 12 自增ID
+	 * 0        |  00000000 00000000 00000000 00000000 00000000 0  | 00000        | 00000      |  00000000 0000
+	 */
 	// 41个字节存储时间，大约69年
 	TIMESTEMP_SHIFT       = CLUSTERID_BITS + NODEIDID_BITS + SEQ_BITS
 	CLUSTERID_SHIFT int64 = NODEIDID_BITS + SEQ_BITS

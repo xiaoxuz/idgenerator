@@ -16,6 +16,10 @@ const (
 	GENE_NODEID_MAX int64 = -1 ^ (-1 << GENE_NODEIDID_BITS)
 	GENE_SEQ_MAX    int64 = -1 ^ (-1 << GENE_SEQ_BITS)
 
+	/**
+	 * 1 符号位  |  28 timestemp                      |  10 nodeID  		|  13 自增ID 		| 12 基因
+	 * 0        |   00000000 00000000 00000000 0000  | 00000000 00      |  00000000 00000 	| 00000000 0000
+	 */
 	// 这块放弃了时间，为了保留基因。timestemp 单位 s，28个 bit 大约7 8年
 	GENE_TIMESTEMP_SHIFT       = GENE_NODEIDID_BITS + GENE_SEQ_BITS + GENE_BITS
 	GENE_NODEIDID_SHIFT  int64 = GENE_SEQ_BITS + GENE_BITS
