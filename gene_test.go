@@ -1,6 +1,7 @@
 package idgenerator
 
 import (
+	"fmt"
 	//"github.com/imroc/biu"
 	"math"
 	"testing"
@@ -22,6 +23,7 @@ func TestGeneGenerator(t *testing.T) {
 	idMap := map[int64]int64{}
 	for i := 0; i < testCnt; i++ {
 		id := <-ch
+		fmt.Println(id)
 		if _, ok := idMap[id]; ok == true {
 			t.Errorf("id repeat: %d", id)
 		}
