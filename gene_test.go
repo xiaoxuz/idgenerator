@@ -11,7 +11,7 @@ func TestGeneGenerator(t *testing.T) {
 
 	var nodeID int64 = 1
 	username := "18600000000"
-	g := NewGeneGenerator(nodeID, []byte(username), 1)
+	g, _ := NewGeneGenerator(nodeID, []byte(username), 1)
 	testCnt := 10
 	ch := make(chan int64, testCnt)
 	for i := 0; i < testCnt; i++ {
@@ -34,7 +34,7 @@ func TestGeneGenerator(t *testing.T) {
 	partNum := int64(math.Pow(2, 4))
 	samplePart := sampleGeneID % partNum
 	t.Logf("partNum:%d sample part:%d", partNum, samplePart)
-	for k,_ := range idMap{
+	for k, _ := range idMap {
 		idPart := k % partNum
 		if samplePart != idPart {
 			t.Errorf("hash table part discord. samplePart:%d idPart:%d", samplePart, idPart)

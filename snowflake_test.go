@@ -8,7 +8,7 @@ func TestGenerator(t *testing.T) {
 
 	var clusterID int64 = 1
 	var nodeID int64 = 1
-	g := NewGenerator(clusterID, nodeID, 2)
+	g, _ := NewGenerator(clusterID, nodeID, 2)
 
 	testCnt := 10000
 	ch := make(chan int64, testCnt)

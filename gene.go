@@ -2,6 +2,7 @@ package idgenerator
 
 import (
 	"crypto/md5"
+	"errors"
 	"fmt"
 	"strconv"
 	"sync"
@@ -41,9 +42,9 @@ type GeneID struct {
 	step      int64
 }
 
-func NewGeneGenerator(nodeID int64, geneSample []byte, step int64) *GeneID {
+func NewGeneGenerator(nodeID int64, geneSample []byte, step int64) (*GeneID, error) {
 	if nodeID > GENE_NODEID_MAX {
-		panic("params invalid")
+		return nil, errors.New("params invalid")
 	}
 	g := &GeneID{
 		m:         sync.Mutex{},
@@ -56,7 +57,7 @@ func NewGeneGenerator(nodeID int64, geneSample []byte, step int64) *GeneID {
 	if step <= 0 {
 		g.step = GENE_DEFAULT_STEP_LONG
 	}
-	return g
+	return g, nil
 }
 
 // 基于基因样本提取基因ID

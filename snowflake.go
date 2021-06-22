@@ -1,6 +1,7 @@
 package idgenerator
 
 import (
+	"errors"
 	"sync"
 	"time"
 )
@@ -39,9 +40,9 @@ type SnowFlaker struct {
 	step      int64
 }
 
-func NewGenerator(clusterID int64, nodeID int64, step int64) *SnowFlaker {
+func NewGenerator(clusterID int64, nodeID int64, step int64) (*SnowFlaker,error) {
 	if clusterID > CLUSTERID_MAX || nodeID > NODEID_MAX {
-		panic("params invalid")
+		return nil, errors.New("params invalid")
 	}
 	s := &SnowFlaker{
 		m:         sync.Mutex{},
@@ -55,7 +56,7 @@ func NewGenerator(clusterID int64, nodeID int64, step int64) *SnowFlaker {
 		s.step = DEFAULT_STEP_LONG
 	}
 
-	return s
+	return s, nil
 }
 
 func (s *SnowFlaker) Generate() int64 {
